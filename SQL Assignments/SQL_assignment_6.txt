@@ -1,0 +1,72 @@
+1.Display all the employees whose department names ending 's'
+
+
+2.Write a query to display the employee names who is having maximum salary in dept name 'accounting'
+
+3.Write a query to display the dept name who is having highest commission
+
+4..Write a query to display the employee names whose dept name has second character as 'o'
+
+
+5.Write a query to display the all the employees whose dept no is same as scott
+
+
+
+6.Write a query to display the all the employees in 'operation' and 'accounting' dept
+
+
+
+7.Write a query to display the employees who has salary greater than miller
+
+
+
+8.Write a query to display all the  employees whose job not same as allen and salary is greater than martin
+
+
+
+9.Write a query to display all employees  who is having location is same as adams manager
+
+
+
+10.Write a query to display the job,manager,number of employees who is working for jones
+
+
+
+11.Write a query to display the  employee details who are reporting to blacke and have commision without using null or not null
+
+
+
+12.Write a query to display the  display all the employees whose dept is sales and who is earning some commision(i.e. comm is not null or zero) and who is hired before the last person
+
+
+
+
+13.Write a query to display the  department name of employee whose salary is greater than avg sal of all clerks
+
+
+
+14.Write a query to display the  employee name who is having minimum salary in dept research
+
+
+
+15.Write a query to display the emp name ,job.location of all employee who are working as manager and works at chicago
+
+
+
+16.Write a query to display the employees who have commission greater than max sal of all the salesman and who do not report to king
+
+
+
+17.Write a query to display the names of employees who earn highest sal in there respective jobs
+
+
+
+18.Write a query to display the employee number and name of employee working as clerk and earning highest salary among clerk
+
+
+
+19.Write a query to display the employee ,department name and LOC of all the employee who are clerk ,reporting to block and salary lesser than martin salary
+
+
+
+20.Write a query to display the number of employees whose commision is more than sal

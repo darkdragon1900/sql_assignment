@@ -1,0 +1,312 @@
+sql assignment 3
+
+--alter assignment
+1. in customer table add a column mobile char(10)
+2. change the size of the mobile col as char(12)
+3. drop a col area_code
+4. remove the pk of the table
+5. add a primary key for custid
+6. email_address column increase the size by 10
+7. rename the table as cust_table
+
+
+Assignment on subqueries  & joins
+
+q.1)display the employee name and the manager name (use self join).
+q.2) the above query sort by ename.
+q.3)display the employee name and his salary and the manager name and manger salary (use self join).
+q.4)write a query for the inner join of the dept and emp table, display DEPTNO,DNAME, dname, job
+q.5)display the ename, sal, dname and location using inner join
+q.6)using subquery :display the information from the emp table for all the employees for which the
+deptno is same as that of jones
+Q. 7) using subquery : display the information from the emp table for all the employees for which the
+deptno is same as that of Miller
+q.8) using subquery :display the information from the emp table for all the employees whose sal is lesser
+than the average sal of the same deptno.
+q.9) using subquery :display the information from the emp table for all the employees whose sal is
+greater than all the employees from department number 20
+q.10) perform the left outer join on department table, and display the columns empno, ename ,dname,
+loc
+q.11) perform the right outer join on department table, and display the columns empno, ename ,
+dname, loc
+q.12) using subquery :display the information from the emp table for all the employees whose sal is
+greater than any of the employees from department number 30
+q.13) using subquery : display the dname and location from the department table where the employees
+exists in it
+q.14) using subquery : display the dname and location from the department table where the employees
+do not exists in it
+q.15) using subquery : display the details from the department table where the employees do not exists
+in it
+q.16)using subquery : display the information from the emp table for all the employees for which the
+deptno is same as that of smith and blake
+
+__________________________________________________________________________________________
+
+1. alter table customer add column mobile1 char(10);
+
+2.alter table customer modify column mobile1 char(12);
+
+3. alter table customer drop column area_code;
+
+4.alter table customer drop primary key;
+
+5.alter table customer modify column custid int primary key;
+
+6.alter table customer modify email varchar(60);
+
+7.alter table customer rename as cust_name;
+
+===========================================================================================
+
+***joins assignment 
+
+===========================================================================================
+
+Q.1. 
+select e.ename as Employee_Name , e1.ename as Manager_Name from emp e, emp e1 where e.mgr=e1.empno;
++---------------+--------------+
+| Employee_Name | Manager_Name |
++---------------+--------------+
+| FORD          | JONES        |
+| SCOTT         | JONES        |
+| JAMES         | BLAKE        |
+| TURNER        | BLAKE        |
+| MARTIN        | BLAKE        |
+| WARD          | BLAKE        |
+| ALLEN         | BLAKE        |
+| MILLER        | CLARK        |
+| ADAMS         | SCOTT        |
+| CLARK         | KING         |
+| BLAKE         | KING         |
+| JONES         | KING         |
+| SMITH         | FORD         |
++---------------+--------------+
+
+Q.2.
+ select e.ename as Employee_Name , e1.ename as Manager_Name from emp e, emp e1 where e.mgr=e1.empno order by e.ename;
++---------------+--------------+
+| Employee_Name | Manager_Name |
++---------------+--------------+
+| ADAMS         | SCOTT        |
+| ALLEN         | BLAKE        |
+| BLAKE         | KING         |
+| CLARK         | KING         |
+| FORD          | JONES        |
+| JAMES         | BLAKE        |
+| JONES         | KING         |
+| MARTIN        | BLAKE        |
+| MILLER        | CLARK        |
+| SCOTT         | JONES        |
+| SMITH         | FORD         |
+| TURNER        | BLAKE        |
+| WARD          | BLAKE        |
++---------------+--------------+
+
+Q.3.
+ select e.ename as Employee_Name , e.sal as Employee_salary, e1.ename as Manager_Name , e1.sal as Manager_salary from emp e, emp e1 where e.mgr=e1.empno order by e.ename;
++---------------+-----------------+--------------+----------------+
+| Employee_Name | Employee_salary | Manager_Name | Manager_salary |
++---------------+-----------------+--------------+----------------+
+| ADAMS         |         1100.00 | SCOTT        |        3000.00 |
+| ALLEN         |         1600.00 | BLAKE        |        2850.00 |
+| BLAKE         |         2850.00 | KING         |        5000.00 |
+| CLARK         |         2450.00 | KING         |        5000.00 |
+| FORD          |         3000.00 | JONES        |        2975.00 |
+| JAMES         |          950.00 | BLAKE        |        2850.00 |
+| JONES         |         2975.00 | KING         |        5000.00 |
+| MARTIN        |         1250.00 | BLAKE        |        2850.00 |
+| MILLER        |         1300.00 | CLARK        |        2450.00 |
+| SCOTT         |         3000.00 | JONES        |        2975.00 |
+| SMITH         |         1200.00 | FORD         |        3000.00 |
+| TURNER        |         1900.00 | BLAKE        |        2850.00 |
+| WARD          |         1250.00 | BLAKE        |        2850.00 |
++---------------+-----------------+--------------+----------------+
+
+Q.4.
+select emp.deptno , dname, ename,job from emp inner join dept on emp.deptno=dept.deptno;
++--------+------------+--------+-----------+
+| deptno | dname      | ename  | job       |
++--------+------------+--------+-----------+
+|     20 | RESEARCH   | SMITH  | CLERK     |
+|     30 | SALES      | ALLEN  | SALESMAN  |
+|     30 | SALES      | WARD   | SALESMAN  |
+|     20 | RESEARCH   | JONES  | MANAGER   |
+|     30 | SALES      | MARTIN | SALESMAN  |
+|     30 | SALES      | BLAKE  | MANAGER   |
+|     10 | ACCOUNTING | CLARK  | MANAGER   |
+|     20 | RESEARCH   | SCOTT  | ANALYST   |
+|     10 | ACCOUNTING | KING   | PRESIDENT |
+|     30 | SALES      | TURNER | SALESMAN  |
+|     20 | RESEARCH   | ADAMS  | CLERK     |
+|     30 | SALES      | JAMES  | CLERK     |
+|     20 | RESEARCH   | FORD   | ANALYST   |
+|     10 | ACCOUNTING | MILLER | CLERK     |
++--------+------------+--------+-----------+
+
+Q.5.
+ select ename , sal, dname,loc from emp inner join dept where emp.deptno=dept.deptno;
++--------+---------+------------+----------+
+| ename  | sal     | dname      | loc      |
++--------+---------+------------+----------+
+| SMITH  | 1200.00 | RESEARCH   | DALLAS   |
+| ALLEN  | 1600.00 | SALES      | CHICAGO  |
+| WARD   | 1250.00 | SALES      | CHICAGO  |
+| JONES  | 2975.00 | RESEARCH   | DALLAS   |
+| MARTIN | 1250.00 | SALES      | CHICAGO  |
+| BLAKE  | 2850.00 | SALES      | CHICAGO  |
+| CLARK  | 2450.00 | ACCOUNTING | NEW YORK |
+| SCOTT  | 3000.00 | RESEARCH   | DALLAS   |
+| KING   | 5000.00 | ACCOUNTING | NEW YORK |
+| TURNER | 1900.00 | SALES      | CHICAGO  |
+| ADAMS  | 1100.00 | RESEARCH   | DALLAS   |
+| JAMES  |  950.00 | SALES      | CHICAGO  |
+| FORD   | 3000.00 | RESEARCH   | DALLAS   |
+| MILLER | 1300.00 | ACCOUNTING | NEW YORK |
++--------+---------+------------+----------+
+
+Q.6.
+
+ select * from emp where deptno=(select deptno from emp where ename='jones');
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7369 | SMITH | CLERK   | 7902 | 1980-12-17 | 1200.00 | NULL |     20 |
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1983-01-12 | 1100.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+Q.7.
+select * from emp where deptno=(select deptno from emp where ename='miller');
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+
+Q.8.
+select * from emp where sal<(select avg(sal) from emp);
+ 
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 | 1200.00 |    NULL |     20 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7934 | MILLER | CLERK    | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1900.00 |    0.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+Q.9.
+ select * from emp where sal>(select max(sal) from emp where deptno=20);
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+
+Q.10.
+select empno,ename,dname,loc from emp left join dept
+on emp.deptno=dept.deptno;
++-------+--------+------------+----------+
+| empno | ename  | dname      | loc      |
++-------+--------+------------+----------+
+|  7369 | SMITH  | RESEARCH   | DALLAS   |
+|  7499 | ALLEN  | SALES      | CHICAGO  |
+|  7521 | WARD   | SALES      | CHICAGO  |
+|  7566 | JONES  | RESEARCH   | DALLAS   |
+|  7654 | MARTIN | SALES      | CHICAGO  |
+|  7698 | BLAKE  | SALES      | CHICAGO  |
+|  7782 | CLARK  | ACCOUNTING | NEW YORK |
+|  7788 | SCOTT  | RESEARCH   | DALLAS   |
+|  7839 | KING   | ACCOUNTING | NEW YORK |
+|  7844 | TURNER | SALES      | CHICAGO  |
+|  7876 | ADAMS  | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | SALES      | CHICAGO  |
+|  7902 | FORD   | RESEARCH   | DALLAS   |
+|  7934 | MILLER | ACCOUNTING | NEW YORK |
++-------+--------+------------+----------+
+
+Q.11.
+ select empno,ename,dname,loc from emp right join dept
+ on emp.deptno=dept.deptno;
++-------+--------+------------+----------+
+| empno | ename  | dname      | loc      |
++-------+--------+------------+----------+
+|  7934 | MILLER | ACCOUNTING | NEW YORK |
+|  7839 | KING   | ACCOUNTING | NEW YORK |
+|  7782 | CLARK  | ACCOUNTING | NEW YORK |
+|  7902 | FORD   | RESEARCH   | DALLAS   |
+|  7876 | ADAMS  | RESEARCH   | DALLAS   |
+|  7788 | SCOTT  | RESEARCH   | DALLAS   |
+|  7566 | JONES  | RESEARCH   | DALLAS   |
+|  7369 | SMITH  | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | SALES      | CHICAGO  |
+|  7844 | TURNER | SALES      | CHICAGO  |
+|  7698 | BLAKE  | SALES      | CHICAGO  |
+|  7654 | MARTIN | SALES      | CHICAGO  |
+|  7521 | WARD   | SALES      | CHICAGO  |
+|  7499 | ALLEN  | SALES      | CHICAGO  |
+|  NULL | NULL   | OPERATIONS | BOSTON   |
++-------+--------+------------+----------+
+
+Q.12.
+ select * from emp where sal>(select max(sal) from emp where deptno=30);
++-------+-------+-----------+------+------------+---------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+-----------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST   | 7566 | 1982-12-09 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
+|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
++-------+-------+-----------+------+------------+---------+------+--------+
+
+Q.13.
+ select dname , loc from dept where deptno in (select distinct deptno from emp);
++------------+----------+
+| dname      | loc      |
++------------+----------+
+| ACCOUNTING | NEW YORK |
+| RESEARCH   | DALLAS   |
+| SALES      | CHICAGO  |
++------------+----------+
+
+Q.14.
+select dname , loc from dept where deptno not  in (select distinct deptno from emp);
++------------+--------+
+| dname      | loc    |
++------------+--------+
+| OPERATIONS | BOSTON |
++------------+--------+
+
+Q.15.
+select * from dept where not exists ( select * from emp where emp.deptno = dept.deptno);
++--------+------------+--------+
+| deptno | dname      | loc    |
++--------+------------+--------+
+|     40 | OPERATIONS | BOSTON |
++--------+------------+--------+
+
+Q.16.
+ select * from emp where deptno in (select deptno from emp where ename in ('smith','blake'));
++-------+--------+----------+------+------------+----------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal      | comm    | deptno |
++-------+--------+----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  6800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 |  1650.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 |  3375.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 16500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+----------+---------+--------+

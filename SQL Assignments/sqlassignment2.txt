@@ -1,0 +1,93 @@
+
+===============================================================================================
+1. in a customer  table , update one of the record of your choice and change the address1 as boston
+
+2. in a customer  table , update one of the record of your choice and change the customer_zip as 100 300
+
+3. delete the first record, give the proper condition in cardinfo
+
+4. truncate the table cardinfo
+
+5. see the structure of cardinfo
+
+6. drop the table cardtype .
+
+7)    Display the month in character for the current date
+
+8)    Display the year  in number for the current date
+
+9)    Display the week number for the current date
+
+10)    Display the details of all employees, sorted on the names.
+
+11)    Display the min, max, avg salary , grouping on deptno
+
+12)    Display the min, max, avg salary , grouping on deptno where the minimum salary is greater than 1000
+
+13)    Display the min, max, avg salary , grouping on deptno where the minimum salary is average than 1000
+
+14)    Create a table with the following structure
+Table :         new emp1
+
+Empno      int    autoincrement pk
+Ename      not null varchar(20)
+City         enum with mum, pune, nasik varchar(20)
+Sal         numeric(10,2)
+Moblile        unique  varchar(20)
+
+==================================================================================================================
+
+use cdac;
+
+mysql> create table customer(
+    custid int,
+    email varchar(60),
+    fname varchar(20),
+    lname varchar(20),
+    address varchar(20),
+    address1 varchar(50),
+    zip_code int,
+    area_code int,
+    telephone_num bigint);
+Query OK, 0 rows affected (0.02 sec)
+
+insert into customer values(1,'shivamgosavi19@gmail.com','shivam','Gosavi','Nashik','Peth road, Nashik',422003,003,9960493185);
+
+insert into customer values(2,'tejasshendkar19@gmail.com','tejas','Shendkar','Pune','Ring road, Pune',532004,008,89762168);
+
+update customer set address1='Chatrapati Sambhajinagar' where custid=2;
+
+update customer set zip_code=100300 where custid=1;
+
+delete from card_info where cardid=1; 
+
+truncate table card_info;
+
+desc card_info;
+
+drop table card_type;
+
+date_format(curdate(), '%M');
+
+date_format(curdate(), '%Y');
+
+select date_format(curdate(), '%U');
+
+select * from emp order by ename;
+
+select deptno,min(sal),max(sal),avg(sal) from emp group by deptno;
+
+select deptno,min(sal),max(sal),avg(sal) from emp group by deptno having min(sal)>1000;
+
+select deptno,min(sal),max(sal),avg(sal) from emp group by deptno having avg(sal)>1000;
+
+ create table new_emp1(
+     Empno int auto_increment primary key,
+     Ename varchar(20) not null,
+     city ENUM('pune','mumbai','nashik'),
+     Sal numeric(10,2),
+     Mobile varchar(20) unique);
+
+
+
+

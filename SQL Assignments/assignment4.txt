@@ -1,0 +1,403 @@
+**********Assignment 4************************
+1. Write a SQL query to create a table named employees with the following columns:
+ emp_id: An auto-incrementing integer column serving as the primary key.
+ emp_name: A variable-length string column to store the names of employees.
+ dept_id: An integer column to store the department ID to which the employee belongs.
+
+2. You have been tasked with creating a table named products in an existing MySQL
+database. The table should have the following columns:
+ product_id: An auto-incrementing integer column serving as the primary key.
+ product_name: A variable-length string column to store the names of products.
+ category_id: An integer column to store the category ID to which the product belongs.
+Check before creating if this table is already exists
+
+3. Create a MySQL table named duplicate_products that replicates the structure of an
+existing table named products.
+
+4. Given an employee table employees with columns emp_id, emp_name, department_id, and
+salary, update the salaries of employees based on their department IDs as follows: increase
+salary by 25% for department 40, 15% for department 90, and 10% for department 110. All
+other department salaries remain unchanged.&quot;
+Hint: use update and case to solve this problem
+
+-- Create the employee table
+
+ALTER COMMAND ASSIGNMENT
+
+1. Rename a Table:
+Renames the table employees to employees_new.
+
+2.Add a Column:
+Adds a new column named region_id to the departments table.
+
+3.Add a Column After Another Column:
+Adds a new column named region_id after the department_name column in the departments
+table.
+
+4.Change Data Type of a Column:
+Modifies the data type of the manager_id column to INT (integer) in the departments table.
+
+5.Drop a Column:
+Drops the location_id column from the departments table.
+
+6.Change Name of a Column:
+Changes the name of the department_name column to dept_name while keeping the data type
+and size the same in the departments table.
+
+7.Add a Primary Key:
+Adds a primary key constraint to the department_id column in the departments table.
+
+8.Add a Composite Primary Key:
+
+Adds a composite primary key constraint to the combination of department_id and manager_id
+columns in the departments table.
+
+9.Drop a Primary Key:
+Drops the primary key constraint from the departments table.
+
+10.Add a Foreign Key:
+Adds a foreign key constraint to the employee_id column in the employee_history table,
+referencing the primary key employee_id column of the employees table.
+
+11.Add a Named Foreign Key:
+Adds a named foreign key constraint fk_employee_id to the employee_id column in the
+employee_history table, referencing the primary key employee_id column of the employees
+table.
+
+12.Drop a Named Foreign Key:
+Drops the named foreign key constraint fk_employee_id from the employee_history table on the
+employee_id column.
+
+13.Add an Index:
+Adds an index named idx_employee_id to the employee_id column in the employee_history
+table.
+
+14.Drop an Index:
+Drops the index named idx_employee_id from the employee_history table.
+
+1.=======================================================================================
+create table employees(
+    -> emp_id int auto_increment primary key,
+    -> emp_name varchar(20) ,
+    -> dept_id int );
+Query OK, 0 rows affected (0.11 sec)
+
+
+2.=======================================================================================
+create table products(
+    -> product_id int auto_increment primary key,
+    -> product_name varchar(20) ,
+    -> category_id int );
+Query OK, 0 rows affected (0.04 sec)
+
+
+3.=======================================================================================
+create table duplicate_products as table products;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+4.=======================================================================================
+mysql>
+mysql> insert into employees values(default,'Employee 2',40,60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into employees values(default,'Employee 3',40,70000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into employees values(default,'Employee 4',40,55000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into employees values(default,'Employee 5',40,45000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into employees values(default,'Employee 6',40,62000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into employees values(default,'Employee 7',40,72000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employees;
++--------+------------+---------+----------+
+| emp_id | emp_name   | dept_id | salary   |
++--------+------------+---------+----------+
+|      1 | Employee 1 |      40 | 50000.00 |
+|      2 | Employee 2 |      40 | 60000.00 |
+|      3 | Employee 3 |      40 | 70000.00 |
+|      4 | Employee 4 |      40 | 55000.00 |
+|      5 | Employee 5 |      40 | 45000.00 |
+|      6 | Employee 6 |      40 | 62000.00 |
+|      7 | Employee 7 |      40 | 72000.00 |
++--------+------------+---------+----------+
+7 rows in set (0.01 sec)
+
+mysql> update employees set dept_id=90 where emp_id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set dept_id=110 where emp_id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set dept_id=30 where emp_id=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set dept_id=40 where emp_id=5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employees set dept_id=90 where emp_id=6;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set dept_id=110 where emp_id=7;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees;
++--------+------------+---------+----------+
+| emp_id | emp_name   | dept_id | salary   |
++--------+------------+---------+----------+
+|      1 | Employee 1 |      40 | 50000.00 |
+|      2 | Employee 2 |      90 | 60000.00 |
+|      3 | Employee 3 |     110 | 70000.00 |
+|      4 | Employee 4 |      30 | 55000.00 |
+|      5 | Employee 5 |      40 | 45000.00 |
+|      6 | Employee 6 |      90 | 62000.00 |
+|      7 | Employee 7 |     110 | 72000.00 |
++--------+------------+---------+----------+
+7 rows in set (0.00 sec)
+
+update employees set salary =
+    case dept_id
+    when 40 then salary+salary*0.25
+    when 90 then salary+salary*0.15
+    when 110 then salary+salary*0.10
+    else salary
+    end 
+    where dept_id between 10 and 110;
++--------+------------+---------+----------+
+| emp_id | emp_name   | dept_id | salary   |
++--------+------------+---------+----------+
+|      1 | Employee 1 |      40 | 62500.00 |
+|      2 | Employee 2 |      90 | 69000.00 |
+|      3 | Employee 3 |     110 | 77000.00 |
+|      4 | Employee 4 |      30 | 55000.00 |
+|      5 | Employee 5 |      40 | 56250.00 |
+|      6 | Employee 6 |      90 | 71300.00 |
+|      7 | Employee 7 |     110 | 79200.00 |
++--------+------------+---------+----------+
+
+ALTER QUARIES ASSIGNMENT================================================================================================
+Q:1 -
+Answer: -
+alter table employee rename to employees_new;
+Query OK, 0 rows affected (0.03 sec)
+desc employees_new;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| emp_id        | int           | YES  |     | NULL    |       |
+| emp_name      | varchar(20)   | YES  |     | NULL    |       |
+| department_id | int           | YES  |     | NULL    |       |
+| salary        | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+==================================================================================================================================================================
+Q2: -
+Answer: -
+alter table dept
+    -> add column region_id int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| deptno    | decimal(2,0) | YES  |     | NULL    |       |
+| dname     | varchar(14)  | YES  |     | NULL    |       |
+| loc       | varchar(13)  | YES  |     | NULL    |       |
+| region_id | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+=================================================================================================================================================================
+Q3: -
+Answer: -
+alter table dept
+    -> add column region_id int after dname;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| deptno    | decimal(2,0) | YES  |     | NULL    |       |
+| dname     | varchar(14)  | YES  |     | NULL    |       |
+| region_id | int          | YES  |     | NULL    |       |
+| loc       | varchar(13)  | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+==============================================================================================================================================================
+Q4: -
+Answer: -
+CREATE TABLE departments (
+department_id INT ,
+department_name VARCHAR(255) NOT NULL,
+manager_id char,
+location_id INT
+);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   |     | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | char(1)      | YES  |     | NULL    |       |
+| location_id     | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table departments
+    -> modify column manager_id int;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   |     | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | int          | YES  |     | NULL    |       |
+| location_id     | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+=================================================================================================================================================================
+Q5: -
+Answer: -
+ alter table departments
+    -> drop column location_id;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   |     | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+================================================================================================================================================================
+Q6: -
+Answer: -
+alter table departments
+    -> rename column department_name to dept_name;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| department_id | int          | NO   |     | NULL    |       |
+| dept_name     | varchar(255) | NO   |     | NULL    |       |
+| manager_id    | int          | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+===============================================================================================================================================================
+Q7: -
+Answer: -
+alter table departments
+    -> add constraint primary key(department_id);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   | PRI | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | char(1)      | YES  |     | NULL    |       |
+| location_id     | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+============================================================================================================================================================
+Q8: -
+Answer: -
+ ALTER TABLE departments
+    -> ADD CONSTRAINT pk_department_manager PRIMARY KEY (department_id, manager_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   | PRI | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | char(1)      | NO   | PRI | NULL    |       |
+| location_id     | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+===========================================================================================================================================================
+Q9: -
+Answer: -
+ALTER TABLE departments
+    -> DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | int          | NO   |     | NULL    |       |
+| department_name | varchar(255) | NO   |     | NULL    |       |
+| manager_id      | char(1)      | YES  |     | NULL    |       |
+| location_id     | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+=============================================================================================================================================================
+Q10: -
+Answer: -
+CREATE INDEX idx_employee_id ON employee_history(employee_id);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_history;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| history_id         | int          | NO   | PRI | NULL    |       |
+| employee_id        | int          | YES  | MUL | NULL    |       |
+| change_date        | date         | YES  |     | NULL    |       |
+| change_description | varchar(255) | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+============================================================================================================================================================
+Q11: -
+Answer:-
+DROP INDEX idx_employee_id ON employee_history;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_history;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| history_id         | int          | NO   | PRI | NULL    |       |
+| employee_id        | int          | YES  |     | NULL    |       |
+| change_date        | date         | YES  |     | NULL    |       |
+| change_description | varchar(255) | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
